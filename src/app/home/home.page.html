@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Practica contactos </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +12,51 @@
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <h1>Datos del contacto</h1>
+    <hr />
+    <br />
+
+    <form [formGroup]="contactForm" (ngSubmit)="guardarContato()">
+      <input
+        type="text"
+        id=""
+        formControlName="nombre"
+        placeholder="Nombre completo"
+      /><br />
+      <div *ngIf="nombre?.invalid && (nombre?.touched || nombre?.dirty)">
+        <div class="error" *ngIf="nombre?.errors?.required">
+          Este campo es requerido
+        </div>
+        <div class="error" *ngIf="nombre?.errors?.maxlength">
+          Solo admmite máximo 35 caracteres
+        </div>
+      </div>
+      <br />
+      <ion-datetime
+        id="datePicker"
+        displayFormat="DD MMM YY"
+        [(ngModel)]="myDate"
+        display-timezone="utc"
+        formControlName="fechaNacimiento"
+        (ionChange)="calculateAge()"
+      ></ion-datetime>
+      <input
+        type="text"
+        id=""
+        formControlName="numeroTel"
+        placeholder="Teléfono"
+      /><br />
+      <div
+        *ngIf="numeroTel?.invalid && (numeroTel?.touched || numeroTel?.dirty)"
+      >
+        <div class="error" *ngIf="numeroTel?.errors?.required">
+          Este campo es requerido
+        </div>
+      </div>
+      <br />
+      <input type="text" id="" formControlName="tipoTelefono" /><br />
+      <input type="text" id="" formControlName="esPrincipal" /><br />
+      <button type="submit">Guardar</button>
+    </form>
   </div>
 </ion-content>
