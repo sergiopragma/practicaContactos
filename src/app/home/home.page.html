@@ -33,16 +33,17 @@
       </div>
       <br />
       <ion-datetime
-        id="datePicker"
+        id=""
         displayFormat="DD MMM YY"
         [(ngModel)]="myDate"
         display-timezone="utc"
         formControlName="fechaNacimiento"
         (ionChange)="calculateAge()"
       ></ion-datetime>
+      <br />
+      <input type="text" id="edad" placeholder="Edad" /><br />
       <input
         type="text"
-        id=""
         formControlName="numeroTel"
         placeholder="Teléfono"
       /><br />

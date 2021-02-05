@@ -38,13 +38,22 @@ export class HomePage {
     let currentDate = new Date();
     let bornDate = new Date(this.contactForm.get('fechaNacimiento').value);
 
-    console.log(currentDate.getFullYear());
-    console.log(bornDate.getFullYear());
+    let age = currentDate.getFullYear() - bornDate.getFullYear();
+
+    if (currentDate.getMonth() < bornDate.getMonth()) {
+      if (currentDate.getDay() < bornDate.getDay()) {
+        age = age - 1;
+      }
+    }
+
+    console.log(age);
+
+    document.getElementById('edad').innerHTML = age.toString();
   }
 
   guardarContato() {
     if (this.contactForm.valid) {
-      this.contactos.push(this.contactForm.value);
+      this.contactos.push(this.contactForm.value) || [];
       localStorage.setItem('contactos', JSON.stringify(this.contactForm.value));
       this.onResetForm();
     } else {
